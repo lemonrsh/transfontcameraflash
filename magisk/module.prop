@@ -1,0 +1,6 @@
+id=frontflash-quicksettings
+name=Front Flash Quick Settings
+version=1.0.0
+versionCode=1
+author=lemonrsh
+description=Adds a root-granted Front flash Quick Settings tile with no launcher app or permission prompt.

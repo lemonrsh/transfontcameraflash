@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = 'FrontFlashTester'
 include ':app'
+include ':tile'

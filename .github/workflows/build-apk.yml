@@ -1,4 +1,4 @@
-name: Build Front Flash Tester APK
+name: Build Front Flash packages
 
 on:
   push:
@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  build-debug-apk:
-    name: Build installable debug APK
+  build-packages:
+    name: Build tester APK and Magisk module
     runs-on: ubuntu-24.04
     steps:
       - name: Check out source
@@ -51,13 +51,23 @@ jobs:
           "$SDKMANAGER" --licenses <<< $'y\ny\ny\ny\ny\ny\ny\ny\ny\ny'
           "$SDKMANAGER" --install "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Build APK
-        run: ./gradlew --no-daemon assembleDebug
+      - name: Build APKs and Magisk module
+        run: |
+          ./gradlew --no-daemon :app:assembleDebug :tile:assembleDebug
+          bash scripts/build-magisk-module.sh
 
-      - name: Upload APK artifact
+      - name: Upload diagnostic APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: front-flash-tester-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload Magisk module artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: front-flash-quick-settings-magisk-module
+          path: build/magisk/FrontFlashQuickSettings-v*.zip
           if-no-files-found: error
           retention-days: 14
