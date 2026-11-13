@@ -4,12 +4,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-    inputs:
-      publish_release:
-        description: Publish the Magisk ZIP as a direct GitHub Release download
-        required: false
-        default: false
-        type: boolean
 
 permissions:
   contents: read
@@ -77,41 +71,3 @@ jobs:
           path: build/magisk/FrontFlashQuickSettings-v*.zip
           if-no-files-found: error
           retention-days: 14
-
-  publish-direct-module-release:
-    name: Publish direct Magisk module download
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_release }}
-    needs: build-packages
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: write
-    steps:
-      - name: Download packaged Magisk module
-        uses: actions/download-artifact@v4
-        with:
-          name: front-flash-quick-settings-magisk-module
-          path: module-release
-
-      - name: Publish direct-download Magisk module release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          MODULE="$(find module-release -maxdepth 1 -type f -name 'FrontFlashQuickSettings-v*.zip' -print -quit)"
-          if [[ -z "$MODULE" ]]; then
-            echo "Magisk module was not found in the downloaded artifact." >&2
-            exit 1
-          fi
-          VERSION="$(basename "$MODULE" | sed -n 's/^FrontFlashQuickSettings-v\(.*\)\.zip$/\1/p')"
-          TAG="frontflash-quicksettings-v${VERSION}"
-          NOTES="Install this exact ZIP from the Magisk app, then reboot. It is a Magisk module; unlike a GitHub Actions artifact, it is not wrapped in another ZIP."
-
-          if gh release view "$TAG" >/dev/null 2>&1; then
-            gh release upload "$TAG" "$MODULE" --clobber
-          else
-            gh release create "$TAG" "$MODULE" \
-              --target "$GITHUB_SHA" \
-              --title "Front Flash Quick Settings v${VERSION}" \
-              --notes "$NOTES"
-          fi

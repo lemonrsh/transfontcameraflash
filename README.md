@@ -21,12 +21,13 @@ The tile discovers a front-facing camera with `FLASH_INFO_AVAILABLE = true`, req
 
 ### Install
 
-1. Download the direct-release asset named `FrontFlashQuickSettings-v1.0.0.zip` from **Releases**.
-2. In the Magisk app, select **Modules** → **Install from storage** and choose that exact ZIP.
-3. Reboot the phone.
-4. Pull down Quick Settings. **Front flash** should already be present. If SystemUI has not finished starting, wait about a minute and open Quick Settings again.
+1. Download the GitHub Actions artifact named **`front-flash-quick-settings-magisk-module`**.
+2. Extract that download once. GitHub wraps every Actions artifact in an outer ZIP.
+3. In the Magisk app, select **Modules** → **Install from storage** and choose the extracted inner file: `FrontFlashQuickSettings-v1.0.0.zip`.
+4. Reboot the phone.
+5. Pull down Quick Settings. **Front flash** should already be present. If SystemUI has not finished starting, wait about a minute and open Quick Settings again.
 
-Do **not** select the ZIP downloaded directly from a GitHub Actions artifact: GitHub wraps each artifact in an outer ZIP, which Magisk correctly reports as "not a Magisk module." Extract that artifact once and select its inner `FrontFlashQuickSettings-v1.0.0.zip`, or use the direct-release asset instead.
+Do **not** select the ZIP downloaded directly from the Actions artifact page: that outer ZIP does not have `module.prop` at its root, so Magisk correctly reports it as "not a Magisk module."
 
 Use the Magisk app to disable or uninstall the module, then reboot. The module's uninstall hook removes its tile reference. Boot-service output is written to:
 
@@ -81,4 +82,4 @@ tile/build/outputs/apk/debug/tile-debug.apk
 build/magisk/FrontFlashQuickSettings-v1.0.0.zip
 ```
 
-GitHub Actions builds all three on pushes, pull requests, and manual workflow dispatch. A manually dispatched build with `publish_release` enabled publishes the Magisk ZIP as a direct GitHub Release asset. The normal **`front-flash-quick-settings-magisk-module`** artifact is retained for 14 days, but must be extracted once before selecting its inner module ZIP in Magisk. The **`front-flash-tester-debug-apk`** artifact contains the diagnostic APK.
+GitHub Actions builds all three on pushes, pull requests, and manual workflow dispatch. The **`front-flash-quick-settings-magisk-module`** artifact is retained for 14 days, but must be extracted once before selecting its inner module ZIP in Magisk. The **`front-flash-tester-debug-apk`** artifact contains the diagnostic APK.
