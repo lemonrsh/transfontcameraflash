@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Front Flash Tester</string>
+    <string name="eyebrow">CAMERA HARDWARE TEST</string>
+    <string name="screen_title">Test your selfie flash</string>
+    <string name="intro_text">Try Android’s built-in torch control for a front-facing camera. This app does not capture photos or video, does not use root, and sends no data.</string>
+    <string name="screen_flash_note">Some selfie lights are screen-only and work only during a camera-app capture. This test can toggle a flash unit only if Android exposes it as a torch.</string>
+
+    <string name="permission_section_title">Camera permission</string>
+    <string name="permission_section_description">Android requires CAMERA permission to inspect camera metadata and request a torch. This app never opens a camera preview or saves media.</string>
+    <string name="permission_needed_explanation">Grant camera access to let Android list camera capabilities and accept a torch request. No photo or video is taken.</string>
+    <string name="permission_granted_explanation">Permission is used only for camera metadata and torch control. No preview, photos, video, or network access.</string>
+    <string name="permission_rationale">Camera access is needed by Android’s camera service for the front-flash test. The app does not capture or store images.</string>
+    <string name="permission_denied_explanation">Camera permission was not granted, so the app cannot query or control a torch. You can grant it from the button below or Android app settings.</string>
+    <string name="grant_camera_permission_button">Grant camera access</string>
+    <string name="scan_cameras_button">Scan front cameras</string>
+
+    <string name="camera_section_title">Front camera with flash</string>
+    <string name="rescan_button">Rescan</string>
+    <string name="camera_info_waiting_for_permission">Grant camera access to discover front-facing cameras.</string>
+    <string name="camera_info_no_front_flash">No controllable front flash is selected.</string>
+    <string name="camera_id_summary">Android camera ID: %1$s\nThe ID is discovered from the camera service; it is not hard-coded.</string>
+    <string name="no_front_camera">Android did not report a front-facing camera. The camera HAL/provider may not have loaded.</string>
+    <string name="front_cameras_without_flash">Found %1$d front camera(s), but none reports a flash unit. A screen-based selfie flash cannot be forced with the torch API.</string>
+    <string name="camera_scan_partial_failure">Camera discovery was incomplete; some camera devices could not be inspected.</string>
+    <string name="front_flash_found">Found %1$d front-facing camera(s) that report flash support. Scanning did not turn any flash on.</string>
+    <string name="front_flash_found_partial">Found %1$d supported front flash camera(s); %2$d camera(s) could not be checked.</string>
+    <string name="camera_scan_failed">Could not scan cameras: %1$s</string>
+    <string name="camera_service_missing">Android’s camera service is unavailable on this device.</string>
+    <string name="scan_not_run">Camera scan has not run yet.</string>
+
+    <string name="control_section_title">Torch status</string>
+    <string name="status_permission_needed">PERMISSION NEEDED</string>
+    <string name="permission_needed_status">Grant camera access before testing the front flash.</string>
+    <string name="status_no_front_flash">NO FRONT FLASH</string>
+    <string name="status_request_failed">REQUEST FAILED</string>
+    <string name="status_torch_unavailable">TORCH UNAVAILABLE</string>
+    <string name="status_requesting_on">REQUESTING ON</string>
+    <string name="status_requesting_off">REQUESTING OFF</string>
+    <string name="status_torch_on">TORCH ON</string>
+    <string name="status_torch_off">TORCH OFF</string>
+    <string name="status_ready">READY TO TEST</string>
+    <string name="waiting_for_hal">Waiting for Android’s camera service to confirm the change…</string>
+    <string name="torch_on_detail">Android reports the selected camera’s torch is ON. Tap OFF to turn it off. The app also requests OFF when it leaves the foreground.</string>
+    <string name="torch_off_detail">Android reports the selected camera’s torch is OFF.</string>
+    <string name="tap_on_to_test">Tap ON to test the front-camera torch. Nothing turns on automatically.</string>
+    <string name="torch_unavailable_detail">Android reports this torch is temporarily unavailable. Close other camera apps, then rescan and try again.</string>
+    <string name="no_torch_confirmation">The camera HAL did not confirm the requested torch state. It may advertise flash support without exposing a usable continuous torch.</string>
+    <string name="camera_access_error">Camera service rejected the request: %1$s. Close other camera apps and try again.</string>
+    <string name="front_flash_not_controllable">Android reports a front flash but rejected torch control for this camera ID. It may be screen-flash-only or require the stock camera’s capture flow.</string>
+    <string name="permission_error">Camera permission or service error: %1$s</string>
+    <string name="turn_on">ON</string>
+    <string name="turn_off">OFF</string>
+
+    <string name="important_title">Important limitation</string>
+    <string name="important_detail">This app tests CameraManager.setTorchMode; it cannot force a vendor-only selfie/screen flash. If Android’s HAL rejects the request, use a camera app that supports the device’s selfie-flash flow. Close GCam or other camera apps before testing.</string>
+</resources>
