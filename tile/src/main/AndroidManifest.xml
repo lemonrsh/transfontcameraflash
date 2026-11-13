@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Granted by the module's root boot service; the APK never displays a permission dialog. -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_front_flash"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/NoDisplayTheme">
+        <!--
+          This package deliberately has no activity or launcher icon. It only supplies the
+          SystemUI Quick Settings tile that the Magisk service registers after boot.
+        -->
+        <service
+            android:name=".FrontFlashTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_front_flash"
+            android:label="@string/tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Front Flash Quick Settings</string>
+    <string name="tile_label">Front flash</string>
+    <string name="tile_unavailable">Front flash unavailable</string>
+    <string name="tile_permission_missing">Camera access is not ready</string>
+    <string name="tile_camera_busy">Front camera is busy</string>
+</resources>
